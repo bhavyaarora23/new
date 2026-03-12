@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Babzieee 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #ff6b8a;
+    --deep: #c0395a;
+    --soft: #ffe4ec;
+    --blush: #fff0f4;
+    --text: #3a1a2a;
+    --gold: #e8a87c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--blush);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ===== FLOATING HEARTS BG ===== */
+  .hearts-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .heart-float {
+    position: absolute;
+    bottom: -60px;
+    font-size: 1.2rem;
+    opacity: 0.18;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(-10deg); opacity: 0.18; }
+    100% { transform: translateY(-110vh) rotate(10deg); opacity: 0; }
+  }
+
+  /* ===== PAGE SYSTEM ===== */
+  .page {
+    display: none;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.7s ease;
+  }
+  .page.active { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+  /* ===== LANDING PAGE ===== */
+  #page-landing {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+    background: radial-gradient(ellipse at center, #fff8fa 0%, var(--soft) 70%, #f9d0de 100%);
+  }
+  .landing-emoji { font-size: 4rem; margin-bottom: 20px; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+  .landing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--deep);
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .landing-sub {
+    font-size: 1.1rem;
+    color: #a05070;
+    margin-bottom: 40px;
+    max-width: 380px;
+    line-height: 1.7;
+  }
+  .btn-main {
+    background: linear-gradient(135deg, var(--pink), var(--deep));
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-family: 'Playfair Display', serif;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(192,57,90,0.35);
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+  }
+  .btn-main:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 14px 40px rgba(192,57,90,0.45); }
+  .btn-main:active { transform: scale(0.97); }
+
+  /* ===== APOLOGY PAGE ===== */
+  #page-apology {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 24px;
+    background: linear-gradient(160deg, #fff0f4 0%, #ffe4ec 50%, #ffd6e8 100%);
+    text-align: center;
+  }
+  .apology-card {
+    background: white;
+    border-radius: 24px;
+    padding: 44px 36px;
+    max-width: 520px;
+    box-shadow: 0 20px 60px rgba(192,57,90,0.12);
+    border: 1px solid #ffd6e4;
+    position: relative;
+    overflow: hidden;
+  }
+  .apology-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--pink), var(--gold), var(--deep));
+  }
+  .apology-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--deep);
+    margin-bottom: 20px;
+  }
+  .apology-card p {
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: #5a2a3a;
+    margin-bottom: 30px;
+  }
+  .nav-dots { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+  .nav-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #e0a0b0; border: none; cursor: pointer; transition: all 0.3s;
+  }
+  .nav-dot.active { background: var(--deep); transform: scale(1.3); }
+
+  /* ===== GAME PAGE ===== */
+  #page-game {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 30px 16px;
+    background: linear-gradient(140deg, #fff0f4, #ffe0ec);
+    text-align: center;
+  }
+  .game-header { margin-bottom: 16px; }
+  .game-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--deep);
+  }
+  .game-header p { color: #a05070; font-size: 0.95rem; margin-top: 6px; }
+  #score-bar-wrap {
+    width: 100%; max-width: 400px;
+    background: #ffd6e4;
+    border-radius: 20px;
+    height: 20px;
+    margin: 10px auto 4px;
+    overflow: hidden;
+  }
+  #score-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--pink), var(--deep));
+    border-radius: 20px;
+    transition: width 0.3s;
+  }
+  #score-label { color: var(--deep); font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+  #game-canvas {
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 10px 40px rgba(192,57,90,0.15);
+    touch-action: none;
+    cursor: none;
+    display: block;
+    max-width: 100%;
+  }
+  #game-message {
+    margin-top: 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--deep);
+    min-height: 32px;
+  }
+
+  /* ===== SCRATCH PAGE ===== */
+  #page-scratch {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background: linear-gradient(140deg, #fff8e8, #ffe4ec);
+    text-align: center;
+  }
+  #page-scratch h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--deep);
+    margin-bottom: 8px;
+  }
+  #page-scratch .sub { color: #a05070; margin-bottom: 30px; font-size: 1rem; }
+  .scratch-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 260px;
+  }
+  .scratch-grid-bonus {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 380px;
+  }
+  .scratch-wrap {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(192,57,90,0.15);
+  }
+  .scratch-wrap.used { pointer-events: none; }
+  .section-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 6px 22px;
+    border-radius: 20px;
+    margin: 14px 0 10px;
+    display: inline-block;
+  }
+  .main-label {
+    background: linear-gradient(135deg, var(--pink), var(--deep));
+    color: white;
+    box-shadow: 0 4px 14px rgba(192,57,90,0.3);
+  }
+  .bonus-label {
+    background: linear-gradient(135deg, #e8a84a, #c0742a);
+    color: white;
+    box-shadow: 0 4px 14px rgba(200,120,50,0.3);
+  }
+  .scratch-grid-bonus { gap: 14px; }
+  .scratch-reward {
+    position: absolute; inset: 0;
+    background: white;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    border-radius: 16px;
+    z-index: 0;
+  }
+  .scratch-reward span { font-size: 0.65rem; font-weight: 700; color: var(--deep); margin-top: 4px; text-align: center; line-height: 1.3; }
+  .scratch-canvas { position: absolute; inset: 0; z-index: 1; border-radius: 16px; }
+  .scratch-locked {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #e8c0c8, #c08090);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; z-index: 2; border-radius: 16px;
+    pointer-events: none; /* never block clicks — JS handles locking */
+  }
+  .scratch-wrap.done-others .scratch-locked {
+    display: flex !important;
+    pointer-events: all;
+    cursor: not-allowed;
+  }
+  #scratch-result {
+    margin-top: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--deep);
+    min-height: 40px;
+    animation: popIn 0.5s ease;
+  }
+  @keyframes popIn { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+  /* ===== LETTER PAGE ===== */
+  #page-letter {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background: linear-gradient(150deg, #fff8f0, #ffe4ec);
+  }
+  .letter-lock {
+    background: white;
+    border-radius: 20px;
+    padding: 36px 30px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 15px 50px rgba(192,57,90,0.12);
+    text-align: center;
+  }
+  .letter-lock h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep); margin-bottom: 8px; }
+  .letter-lock p { color: #a05070; font-size: 0.95rem; margin-bottom: 24px; }
+  .pw-input {
+    border: 2px solid #f0c0cc;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    letter-spacing: 2px;
+    transition: border 0.3s;
+    margin-bottom: 14px;
+  }
+  .pw-input:focus { border-color: var(--pink); }
+  .pw-hint { font-size: 0.8rem; color: #c08090; margin-bottom: 16px; }
+  .pw-wrong { color: #e04060; font-size: 0.9rem; margin-top: 8px; min-height: 20px; }
+  .letter-content {
+    display: none;
+    background: white;
+    border-radius: 20px;
+    padding: 40px 32px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 15px 50px rgba(192,57,90,0.12);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .letter-content::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--pink), var(--deep));
+  }
+  .letter-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--deep);
+    margin-bottom: 20px;
+  }
+  .letter-body {
+    font-size: 1.05rem;
+    line-height: 2;
+    color: #4a2030;
+    font-style: italic;
+  }
+  .letter-ps {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--deep);
+    font-weight: 700;
+  }
+  .letter-sig {
+    margin-top: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--pink);
+    text-align: right;
+  }
+
+  /* ===== FINAL PAGE ===== */
+  #page-final {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background: radial-gradient(ellipse at center, #fff0f4 0%, #ffd6e8 70%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #page-final h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
+    color: var(--deep);
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+  .final-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .btn-yes {
+    background: linear-gradient(135deg, var(--pink), var(--deep));
+    color: white; border: none;
+    padding: 18px 36px; border-radius: 50px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(192,57,90,0.35);
+    transition: all 0.3s;
+  }
+  .btn-yes:hover { transform: translateY(-4px) scale(1.06); box-shadow: 0 16px 40px rgba(192,57,90,0.45); }
+  #hearts-explosion { position: fixed; inset: 0; pointer-events: none; z-index: 100; }
+  .exp-heart {
+    position: absolute;
+    font-size: 2rem;
+    animation: explodeHeart 1.8s ease-out forwards;
+    opacity: 0;
+  }
+  @keyframes explodeHeart {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    60% { opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1.2); opacity: 0; }
+  }
+  #final-msg {
+    margin-top: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--deep);
+    min-height: 40px;
+    animation: popIn 0.5s ease;
+  }
+
+  /* ===== NAV ===== */
+  .nav-strip {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: white;
+    display: flex; justify-content: center; gap: 4px;
+    padding: 10px 16px;
+    box-shadow: 0 -4px 20px rgba(192,57,90,0.1);
+    z-index: 50;
+  }
+  .nav-btn {
+    flex: 1; max-width: 80px;
+    background: none; border: none;
+    padding: 6px 4px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    transition: all 0.2s;
+    color: #c08090;
+  }
+  .nav-btn.unlocked { color: var(--pink); }
+  .nav-btn.active { background: var(--soft); transform: scale(1.1); }
+  .nav-btn.locked { opacity: 0.3; cursor: not-allowed; }
+  .nav-btn small { display: block; font-size: 0.55rem; font-family: 'Lato', sans-serif; color: inherit; }
+
+  /* ===== UTIL ===== */
+  .pink-star {
+    color: var(--pink);
+    font-size: 2rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .spacer { height: 70px; }
+  @media(max-width:380px) {
+    .scratch-wrap { width: 90px; height: 90px; }
+    .apology-card { padding: 30px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts -->
+<div class="hearts-bg" id="heartsBg"></div>
+
+<!-- =================== LANDING =================== -->
+<div class="page active" id="page-landing">
+  <div class="landing-emoji">🥺</div>
+  <h1 class="landing-title">Hey Babzieee…</h1>
+  <p class="landing-sub">I know you're upset with me 🥺 but please give me 2 minutes… I made something for you.</p>
+  <button class="btn-main" onclick="goTo('apology')">Click here Babzieee ❤️</button>
+</div>
+
+<!-- =================== APOLOGY =================== -->
+<div class="page" id="page-apology">
+  <div class="apology-card">
+    <span class="pink-star">💔</span>
+    <h2>I'm Really Sorry, Babzieee</h2>
+    <p>
+      I'm really sorry Babzieee. I promise I won't repeat it. I hate when we fight and you stop talking to me. Everything feels wrong when you're upset with me.
+    </p>
+    <button class="btn-main" onclick="goTo('game')">Play a tiny game for me? 🎮</button>
+    <div class="nav-dots" style="margin-top:20px;">
+      <div class="nav-dot"></div>
+      <div class="nav-dot active"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+<!-- =================== GAME =================== -->
+<div class="page" id="page-game">
+  <div class="game-header">
+    <h2>Catch My Heart 🎮</h2>
+    <p>Score 50 to unlock a surprise gift 🎁</p>
+  </div>
+  <div id="score-bar-wrap"><div id="score-bar"></div></div>
+  <div id="score-label">Score: 0 / 50</div>
+  <canvas id="game-canvas" width="340" height="380"></canvas>
+  <div id="game-message"></div>
+  <div class="spacer"></div>
+</div>
+
+<!-- =================== SCRATCH =================== -->
+<div class="page" id="page-scratch">
+  <h2>Your Gift 🎁</h2>
+  <p class="sub">Scratch <strong>1 main card</strong> — or peek at a bonus too 🎀</p>
+
+  <div class="section-label main-label">✨ Main Prizes</div>
+  <div class="scratch-grid" id="scratchMain"></div>
+
+  <div class="section-label bonus-label">🎀 Bonus Cards</div>
+  <div class="scratch-grid scratch-grid-bonus" id="scratchBonus"></div>
+
+  <div id="scratch-result"></div>
+  <br>
+  <button class="btn-main" style="margin-top:10px;display:none;" id="letterBtn" onclick="goTo('letter')">Open my secret letter 💌</button>
+  <div class="spacer"></div>
+</div>
+
+<!-- =================== LETTER =================== -->
+<div class="page" id="page-letter">
+  <div class="letter-lock" id="letterLock">
+    <span style="font-size:2.5rem">💌</span>
+    <h2>Secret Love Letter</h2>
+    <p>This is just for you. Enter the password to open it.</p>
+    <input class="pw-input" id="pwInput" type="password" placeholder="Password..." maxlength="20" onkeydown="if(event.key==='Enter')checkPw()">
+    <div class="pw-hint">💡 Hint: What I always call you</div>
+    <button class="btn-main" onclick="checkPw()">Open 💕</button>
+    <div class="pw-wrong" id="pwWrong"></div>
+  </div>
+  <div class="letter-content" id="letterContent">
+    <h3>My Dearest Babzieee,</h3>
+    <div class="letter-body">
+      You are my whole heart. You hold such a precious place in my life. All my smiles and memories have your name attached to them. Let's end this fight now. You are only my baby and I am only yours ❤️.
+    </div>
+    <div class="letter-ps">PS: we're stuck with each other forever now. 🫶</div>
+    <div class="letter-sig">— Always yours ♥</div>
+    <br>
+    <button class="btn-main" onclick="goTo('final')" style="width:100%">One last thing… 🥺</button>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+<!-- =================== FINAL =================== -->
+<div class="page" id="page-final">
+  <h2>Will you stop being angry and go on a date with me? 🥺</h2>
+  <div class="final-btns">
+    <button class="btn-yes" onclick="yesClicked(this)">Yes 💕</button>
+    <button class="btn-yes" onclick="yesClicked(this)">Yes obviously 😍</button>
+  </div>
+  <div id="final-msg"></div>
+  <div id="hearts-explosion"></div>
+  <div class="spacer"></div>
+</div>
+
+<!-- =================== NAV =================== -->
+<div class="nav-strip" id="navStrip">
+  <button class="nav-btn active" data-page="landing" onclick="navClick('landing')">🏠<small>Home</small></button>
+  <button class="nav-btn unlocked" data-page="apology" onclick="navClick('apology')">💔<small>Sorry</small></button>
+  <button class="nav-btn locked" data-page="game" id="navGame" onclick="navClick('game')">🎮<small>Game</small></button>
+  <button class="nav-btn locked" data-page="scratch" id="navScratch">🎁<small>Gift</small></button>
+  <button class="nav-btn locked" data-page="letter" id="navLetter">💌<small>Letter</small></button>
+  <button class="nav-btn locked" data-page="final" id="navFinal">❤️<small>Date</small></button>
+</div>
+
+<script>
+// ======= STATE =======
+const state = { current: 'landing', unlocked: new Set(['landing','apology','game']), scratchDone: false, letterOpen: false };
+
+// ======= PAGES =======
+function goTo(id) {
+  if (!state.unlocked.has(id)) return;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  state.current = id;
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.page === id);
+  });
+  if (id === 'game' && !gameStarted) startGame();
+  window.scrollTo(0,0);
+}
+function navClick(id) {
+  if (state.unlocked.has(id)) goTo(id);
+}
+function unlock(id) {
+  state.unlocked.add(id);
+  const el = document.getElementById('nav'+id.charAt(0).toUpperCase()+id.slice(1));
+  if (el) { el.classList.remove('locked'); el.classList.add('unlocked'); el.onclick = () => navClick(id); }
+}
+
+// ======= FLOATING HEARTS =======
+(function() {
+  const msgs = ['❤️','🩷','💕','💖','💗','🫶'];
+  for (let i=0;i<16;i++) {
+    const h = document.createElement('div');
+    h.className='heart-float';
+    h.textContent=msgs[Math.floor(Math.random()*msgs.length)];
+    h.style.left=Math.random()*100+'%';
+    h.style.animationDuration=(8+Math.random()*12)+'s';
+    h.style.animationDelay=-(Math.random()*20)+'s';
+    h.style.fontSize=(0.8+Math.random()*1.2)+'rem';
+    document.getElementById('heartsBg').appendChild(h);
+  }
+})();
+
+// ======= GAME =======
+const LABELS = ['❤️ Sorry','❤️ I miss you','❤️ Please smile','❤️ Forgive me Babzieee'];
+let gameStarted=false, gameScore=0, gameActive=false, animId, items=[], paddle, gameCanvas, ctx2;
+
+function startGame() {
+  gameStarted=true; gameActive=true; gameScore=0; items=[];
+  gameCanvas=document.getElementById('game-canvas');
+  ctx2=gameCanvas.getContext('2d');
+  const W=gameCanvas.width, H=gameCanvas.height;
+  paddle={x:W/2-50,y:H-40,w:100,h:18,color:'#ff6b8a'};
+
+  // Touch/mouse
+  function movePaddle(cx) {
+    paddle.x=Math.max(0,Math.min(W-paddle.w,cx-paddle.w/2));
+  }
+  gameCanvas.onmousemove=e=>{const r=gameCanvas.getBoundingClientRect();movePaddle(e.clientX-r.left);};
+  gameCanvas.ontouchmove=e=>{e.preventDefault();const r=gameCanvas.getBoundingClientRect();movePaddle(e.touches[0].clientX-r.left);};
+
+  let spawnT=0;
+  function loop() {
+    if(!gameActive){cancelAnimationFrame(animId);return;}
+    ctx2.clearRect(0,0,W,H);
+    ctx2.fillStyle='#fff8fa';ctx2.fillRect(0,0,W,H);
+
+    // Spawn
+    spawnT++;
+    if(spawnT>45){
+      items.push({x:20+Math.random()*(W-40),y:-30,vy:2+Math.random()*2,label:LABELS[Math.floor(Math.random()*LABELS.length)],size:20+Math.random()*10});
+      spawnT=0;
+    }
+
+    // Draw items
+    items.forEach(it=>{
+      it.y+=it.vy;
+      ctx2.font=`${it.size}px serif`;
+      ctx2.fillText(it.label.split(' ')[0],it.x-10,it.y);
+      ctx2.font=`bold 11px Lato`;
+      ctx2.fillStyle='#c0395a';
+      ctx2.fillText(it.label.split(' ').slice(1).join(' '),it.x-24,it.y+14);
+      ctx2.fillStyle='#ff6b8a';
+    });
+
+    // Paddle
+    ctx2.fillStyle='#ff6b8a';
+    const pr=paddle.h/2;
+    ctx2.beginPath();ctx2.roundRect(paddle.x,paddle.y,paddle.w,paddle.h,pr);ctx2.fill();
+    ctx2.fillStyle='white';ctx2.font='bold 10px Lato';ctx2.textAlign='center';
+    ctx2.fillText('CATCH ❤️',paddle.x+paddle.w/2,paddle.y+12);ctx2.textAlign='left';
+
+    // Collision
+    items=items.filter(it=>{
+      if(it.y+20>paddle.y && it.y-20<paddle.y+paddle.h && it.x>paddle.x && it.x<paddle.x+paddle.w){
+        gameScore++;
+        document.getElementById('score-label').textContent=`Score: ${gameScore} / 50`;
+        document.getElementById('score-bar').style.width=Math.min(gameScore/50*100,100)+'%';
+        showFloatText(it.x,it.y,'+1 ❤️',ctx2);
+        if(gameScore>=50){
+          gameActive=false;
+          setTimeout(()=>{
+            document.getElementById('game-message').textContent='🎉 You won! Your gift is waiting!';
+            unlock('scratch');
+            setTimeout(()=>goTo('scratch'),1400);
+          },400);
+        }
+        return false;
+      }
+      return it.y<H+30;
+    });
+
+    animId=requestAnimationFrame(loop);
+  }
+  animId=requestAnimationFrame(loop);
+}
+
+function showFloatText(x,y,text,ctx){
+  // simple canvas flash
+  ctx.fillStyle='#c0395a';ctx.font='bold 14px Lato';
+  ctx.fillText(text,x,y);
+}
+
+// ======= SCRATCH CARDS =======
+const mainRewards=[
+  {emoji:'📱',label:'iPhone 17 Pro'},
+  {emoji:'💻',label:'MacBook'},
+  {emoji:'⌚',label:'Apple Watch'},
+  {emoji:'🎁',label:'Anything you want'},
+];
+const bonusRewards=[
+  {emoji:'🍿',label:'Movie date'},
+  {emoji:'😘',label:'Kiss coupon'},
+  {emoji:'👑',label:'One full day your rules'},
+];
+
+let mainScratchDone=false;   // only 1 main card allowed
+let bonusScratchDone=false;  // only 1 bonus card allowed
+
+function buildScratchGroup(rewards, gridId, isBonus){
+  const grid=document.getElementById(gridId);
+  let groupUsed=false;
+  const canvases=[];
+
+  rewards.forEach((r,i)=>{
+    const wrap=document.createElement('div');
+    wrap.className='scratch-wrap';
+    wrap.id=(isBonus?'sb':'sm')+i;
+
+    const rew=document.createElement('div');
+    rew.className='scratch-reward';
+    // bonus rewards have gold tint background
+    if(isBonus) rew.style.background='linear-gradient(135deg,#fff8ee,#fff0d8)';
+    rew.innerHTML=`${r.emoji}<span>${r.label}</span>`;
+
+    const cvs=document.createElement('canvas');
+    cvs.className='scratch-canvas';
+    cvs.width=110; cvs.height=110;
+    const c=cvs.getContext('2d');
+    canvases.push({cvs,c});
+
+    function drawCoating(){
+      c.globalCompositeOperation='source-over';
+      if(isBonus){
+        const g=c.createLinearGradient(0,0,110,110);
+        g.addColorStop(0,'#e8c87a'); g.addColorStop(1,'#c8904a');
+        c.fillStyle=g;
+      } else {
+        const g=c.createLinearGradient(0,0,110,110);
+        g.addColorStop(0,'#e8a0b0'); g.addColorStop(1,'#c07080');
+        c.fillStyle=g;
+      }
+      c.fillRect(0,0,110,110);
+      c.fillStyle='rgba(255,255,255,0.3)';
+      c.font='bold 22px serif'; c.textAlign='center';
+      c.fillText(isBonus?'🎀':'🎁',55,54);
+      c.fillStyle='rgba(255,255,255,0.6)';
+      c.font='bold 9px sans-serif';
+      c.fillText('SCRATCH ME',55,74);
+    }
+    drawCoating();
+
+    wrap.appendChild(rew);
+    wrap.appendChild(cvs);
+    grid.appendChild(wrap);
+
+    let scratching=false, revealed=false, activeIdx=-1;
+
+    function getPos(e){
+      const rect=cvs.getBoundingClientRect();
+      const src=e.touches?e.touches[0]:e;
+      return {x:src.clientX-rect.left, y:src.clientY-rect.top};
+    }
+
+    function doScratch(pos){
+      if(groupUsed && activeIdx!==i) return;
+      if(revealed) return;
+      if(activeIdx===-1) activeIdx=i;
+      if(activeIdx!==i) return;
+
+      c.globalCompositeOperation='destination-out';
+      c.beginPath(); c.arc(pos.x,pos.y,22,0,Math.PI*2); c.fill();
+
+      const d=c.getImageData(0,0,110,110).data;
+      let transparent=0;
+      for(let k=3;k<d.length;k+=4) if(d[k]<50) transparent++;
+
+      if(transparent/(d.length/4)>0.5){
+        revealed=true; groupUsed=true;
+        if(isBonus) bonusScratchDone=true; else mainScratchDone=true;
+        cvs.style.display='none';
+
+        // fade out others in same group
+        rewards.forEach((_,j)=>{
+          if(j!==i){
+            const ow=document.getElementById((isBonus?'sb':'sm')+j);
+            ow.style.opacity='0.3';
+            ow.style.pointerEvents='none';
+          }
+        });
+
+        // show result
+        const tag=isBonus?'🎀 Bonus':'🎉 Main';
+        const existing=document.getElementById('scratch-result').innerHTML;
+        document.getElementById('scratch-result').innerHTML=
+          existing + (existing?'<br>':'') +
+          `<span style="font-size:0.8rem;background:${isBonus?'#e8a84a':' var(--deep)'};color:white;padding:2px 10px;border-radius:10px;">${tag}</span> You got: <strong>${r.emoji} ${r.label}</strong>! I promise! ❤️`;
+
+        // unlock letter once main card is scratched
+        if(!isBonus){
+          unlock('letter');
+          document.getElementById('letterBtn').style.display='inline-block';
+        }
+      }
+    }
+
+    cvs.addEventListener('mousedown', e=>{scratching=true; doScratch(getPos(e));});
+    document.addEventListener('mouseup', ()=>scratching=false);
+    cvs.addEventListener('mousemove', e=>{if(scratching) doScratch(getPos(e));});
+    cvs.addEventListener('touchstart', e=>{e.preventDefault(); scratching=true; doScratch(getPos(e));},{passive:false});
+    document.addEventListener('touchend', ()=>scratching=false);
+    cvs.addEventListener('touchmove', e=>{e.preventDefault(); if(scratching) doScratch(getPos(e));},{passive:false});
+  });
+}
+
+buildScratchGroup(mainRewards, 'scratchMain', false);
+buildScratchGroup(bonusRewards, 'scratchBonus', true);
+
+// ======= PASSWORD =======
+function checkPw(){
+  const v=document.getElementById('pwInput').value.trim().toLowerCase();
+  if(v==='babzieee'||v==='babzie'){
+    document.getElementById('letterLock').style.display='none';
+    document.getElementById('letterContent').style.display='block';
+    unlock('final');
+  } else {
+    document.getElementById('pwWrong').textContent='❌ Try again, Babzieee knows the hint!';
+    document.getElementById('pwInput').value='';
+  }
+}
+
+// ======= FINAL =======
+function yesClicked(btn){
+  btn.disabled=true;
+  document.getElementById('final-msg').textContent='Yayyyy!! I knew it!! 💖💖💖';
+  explodeHearts();
+  unlock('final');
+}
+function explodeHearts(){
+  const cont=document.getElementById('hearts-explosion');
+  for(let i=0;i<35;i++){
+    const h=document.createElement('div');h.className='exp-heart';
+    h.textContent=['❤️','💕','💖','🩷','💗','💝'][Math.floor(Math.random()*6)];
+    h.style.left='50%';h.style.top='50%';
+    const angle=Math.random()*Math.PI*2;
+    const dist=120+Math.random()*200;
+    h.style.setProperty('--tx',Math.cos(angle)*dist+'px');
+    h.style.setProperty('--ty',Math.sin(angle)*dist+'px');
+    h.style.animationDelay=(Math.random()*0.4)+'s';
+    h.style.animationDuration=(1.2+Math.random()*0.8)+'s';
+    cont.appendChild(h);
+    setTimeout(()=>h.remove(),2500);
+  }
+}
+
+// ======= UNLOCK scratch after game won (already handled in game) =======
+</script>
+</body>
+</html>
